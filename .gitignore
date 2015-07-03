@@ -1,0 +1,7 @@
+.idea
+backup*
+out
+target
+logs
+*.iml
+git

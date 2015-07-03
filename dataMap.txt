@@ -1,0 +1,5 @@
+image
+ - source (enum){gallery, image, imageList}
+ - sourceIdFrom (String){url, }
+ - urlParameter
+ - 

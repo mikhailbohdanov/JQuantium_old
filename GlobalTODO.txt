@@ -1,0 +1,4 @@
+ - Authorization token save in database not in session
+ - All DAO layers optimize for one conception
+ - Can enable some modules or groups for custom language
+ -

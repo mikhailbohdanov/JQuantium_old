@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xmlns="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                            http://www.springframework.org/schema/security
+                            http://www.springframework.org/schema/security/spring-security-3.2.xsd"
+        xmlns:beans="http://www.springframework.org/schema/beans">
+
+    <global-method-security secured-annotations="enabled" />
+
+    <http use-expressions="true" entry-point-ref="authenticationEntryPoint">
+        <!--<intercept-url pattern="/jq-admin/**" access="hasRole('ROLE_ADMIN')" />-->
+
+
+        <intercept-url pattern="/**" access="permitAll()" />
+
+
+
+
+        <anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
+
+        <remember-me key="saveMe" token-validity-seconds="2678400" />
+    </http>
+
+
+    <beans:bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder"/>
+
+    <beans:bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/signin"/>
+    </beans:bean>
+
+    <beans:bean id="security" class="com.quantium.web.service.Security"/>
+    <authentication-manager alias="authentication-manager">
+        <authentication-provider user-service-ref="security">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+
+
+
+</beans:beans>
